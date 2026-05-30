@@ -1,0 +1,22 @@
+name: Connect to Tailscale machine
+on: 
+  workflow_dispatch:
+
+jobs:
+  run-linux-machine:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch Code
+        uses: actions/checkout@v4
+
+      - name: Boot Tailscale Client
+        uses: tailscale/github-action@v2
+        with:
+          authkey: ${{ secrets.TAILSCALE_AUTH_KEY }}
+
+      - name: Keep Machine Alive
+        run: |
+          echo "Your free Linux machine is active!"
+          echo "This is its Tailscale IP address:"
+          tailscale ip -4
+          sleep 600
