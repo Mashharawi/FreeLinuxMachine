@@ -13,10 +13,11 @@ jobs:
         uses: tailscale/github-action@v2
         with:
           authkey: ${{ secrets.TAILSCALE_AUTH_KEY }}
+          ssh: true # <--- THIS LINE IS NEW
 
       - name: Keep Machine Alive
         run: |
           echo "Your free Linux machine is active!"
           echo "This is its Tailscale IP address:"
           tailscale ip -4
-          sleep 600
+          sleep 1800 # Increased to 30 minutes (1800 seconds) so you have time to work
